@@ -30,7 +30,7 @@ export default function Save(props) {
         }
 
         const taskCompleted = () =>{
-            snapshot.ref.getDownloadURL().then((snapshot)=>{
+            task.snapshot.ref.getDownloadURL().then((snapshot)=>{
                 savePostData(snapshot);
                 console.log(snapshot)
             })
@@ -51,7 +51,7 @@ export default function Save(props) {
         .add({
             downloadURL,
             caption,
-            creation: firebase.firestore.FieldValue.serverTimeStamp()
+            creation: firebase.firestore.FieldValue.serverTimestamp()
         }).then((function (){
             props.navigation.popToTop()
         }))
@@ -61,7 +61,7 @@ export default function Save(props) {
             <Image source={{ uri: props.route.params.image }}/>
             <TextInput 
                 placeholder="Write a Caption . . ."
-                onChangeText={(caption)=> setCapion(caption)}
+                onChangeText={(caption)=> setCaption(caption)}
             />
 
             <Button title="Save" onPress={()=> uploadImage()}/>
