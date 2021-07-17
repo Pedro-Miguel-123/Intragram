@@ -12,7 +12,7 @@ function Feed(props) {
 
     useEffect(() => {
         let posts = [];
-        if(props.usersLoaded == props.following.length){
+        if(props.usersLoaded == props.following.length && props.following.length!==0){
             for(let i=0;i<props.following.length;i++){
                 const user = props.users.find(el => el.uid === props.following[i]);
                 if(user != undefined){
@@ -71,8 +71,8 @@ const styles= StyleSheet.create({
 const mapStateToProps = (store) =>({
     currentUser: store.userState.currentUser,
     following: store.userState.following,
-    users: store.userState.users,
-    usersLoaded: store.userState.usersLoaded,
+    users: store.usersState.users,
+    usersLoaded: store.usersState.usersLoaded,
     
 })
 

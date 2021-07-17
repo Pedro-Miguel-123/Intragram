@@ -1,4 +1,4 @@
-import { USER_STATE_CHANGE , USER_POSTS_STATE_CHANGE, USER_FOLLOWING_STATE_CHANGE, USERS_DATA_STATE_CHANGE, CLEAR_DATA} from '../constants/index'
+import { USER_STATE_CHANGE , USER_POSTS_STATE_CHANGE, USER_FOLLOWING_STATE_CHANGE, USERS_DATA_STATE_CHANGE,USERS_POSTS_STATE_CHANGE,CLEAR_DATA} from '../constants/index'
 import { SnapshotViewIOSComponent } from 'react-native'
 import firebase from 'firebase'
 require('firebase/firestore')
@@ -58,6 +58,7 @@ export function fetchUserFollowing(){
                 })
                 dispatch({type : USER_FOLLOWING_STATE_CHANGE, following});
                 for(let i=0;i < following.length;i++){
+                    console.log("Adios"+following[i]);
                     dispatch(fetchUsersData(following[i],true));
                 }
             })
@@ -66,6 +67,7 @@ export function fetchUserFollowing(){
 
 export function fetchUsersData(uid, getPosts){
     return((dispatch,getState)=>{
+        console.log("OLA " + usersState.users);
         const found = getState().usersState.users.some(el => el.uid === uid);
         if(!found){
             firebase.firestore()
